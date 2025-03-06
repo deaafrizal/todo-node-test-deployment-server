@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NODE JS Todo List</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h1>Node JS Todo List</h1>
+
+    <form action="/tasks" method="POST">
+      <input type="text" name="task" placeholder="Add a new task" />
+      <button type="submit">Add</button>
+    </form>
+
+    <ul>
+      <% tasks.forEach((task, index) => { %>
+      <li>
+        <% if (task.completed) { %>
+        <span class="completed"><%= task.text %></span>
+        <% } else { %>
+        <span><%= task.text %></span>
+        <% } %>
+        <form
+          action="/complete/<%= index %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Complete</button>
+        </form>
+        <form
+          action="/delete/<%= index %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
